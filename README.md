@@ -53,14 +53,22 @@ OS/hardware combination.  Otherwise, build it yourself from source.
 
 ## Contemporary versions
 
-| SAC/BRIS Release | 11.6 | 10.6- |
-| ---------------- | -----| ----- |
-| [grh-116](https://members.elsi.jp/~george/sac-bugs.html#grh115) | M1 X+mac | |
-| | | |
-| [grh-115](https://members.elsi.jp/~george/sac-bugs.html#grh115) | | [Intel X+mac](https://members.elsi.jp/~george/MacSAC-grh115-10.9i.dmg) |
-| | | |
-| [grh-114](https://members.elsi.jp/~george/sac-bugs.html#grh114) | | [Intel X+mac](https://members.elsi.jp/~george/MacSAC-grh114-10.9i.dmg) |
-| | | |
+| SAC/BRIS Release | 11.6 | 10.6- | 10.5-10.4 |
+| ---------------- | -----| ----- | --------- |
+| [grh-116](https://members.elsi.jp/~george/sac-bugs.html#grh115) | M1 X+mac | | |
+| | | | |
+| [grh-115](https://members.elsi.jp/~george/sac-bugs.html#grh115) | | [Intel X+mac](https://members.elsi.jp/~george/MacSAC-grh115-10.9i.dmg) | |
+| | | | |
+| [grh-114](https://members.elsi.jp/~george/sac-bugs.html#grh114) | | [Intel X+mac](https://members.elsi.jp/~george/MacSAC-grh114-10.9i.dmg) | |
+| | | | |
+| [grh-113](https://members.elsi.jp/~george/sac-bugs.html#grh113) | | [Intel X+mac](http://www1.gly.bris.ac.uk/MacSAC/MacSAC-grh113-10.9i.dmg) | |
+| | | | |
+| [grh-112](https://members.elsi.jp/~george/sac-bugs.html#grh112) | | [Intel X+mac](http://www1.gly.bris.ac.uk/MacSAC/MacSAC-grh112-10.9i.dmg) | |
+| | | | |
+| [grh-111](https://members.elsi.jp/~george/sac-bugs.html#grh111) | | [Intel X+mac](http://www1.gly.bris.ac.uk/MacSAC/MacSAC-grh111-10.9j.dmg) | |
+| | | | |
+| [grh-110](https://members.elsi.jp/~george/sac-bugs.html#grh110) | | | [Intel X+mac parallel](http://www1.gly.bris.ac.uk/MacSAC/MacSAC-grh110-10.6jP.dmg) [Intel X+mac](http://www1.gly.bris.ac.uk/MacSAC/MacSAC-grh110-10.6i.dmg) | [Intel X+mac](http://www1.gly.bris.ac.uk/MacSAC/MacSAC-grh110-10.4i.dmg) [PPC   X+mac](http://www1.gly.bris.ac.uk/MacSAC/MacSAC-grh110-10.4p.dmg) |
+
 
 ### Glossary
 * Intel - Intel hardware.
