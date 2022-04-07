@@ -53,8 +53,8 @@ OS/hardware combination.  Otherwise, build it yourself from source.
 
 ## Contemporary versions
 
-| SAC/BRIS Release | 11.6 | 10.6- | 10.5-10.4 |
-| ---------------- | -----| ----- | --------- |
+| SAC/BRIS Release | 11.6 | 10.16-10.6 | 10.5-10.4 |
+| ---------------- | -----| ---------- | --------- |
 | [grh-116](https://members.elsi.jp/~george/sac-bugs.html#grh115) | M1 X+mac | | |
 | | | | |
 | [grh-115](https://members.elsi.jp/~george/sac-bugs.html#grh115) | | [Intel X+mac](https://members.elsi.jp/~george/MacSAC-grh115-10.9i.dmg) | |
@@ -71,7 +71,9 @@ OS/hardware combination.  Otherwise, build it yourself from source.
 
 
 ### Glossary
+* M1 - *Apple silicon* (ARM 64 bit) hardware.
 * Intel - Intel hardware.
+* PPC - PowerPC hardware.
 * X+mac - Support for both X11 graphics and native Mac graphics.
 * mac - Support for native Mac graphics ONLY. This means that you do NOT have to have X11 installed on your Mac in order to run SAC.
 * X - Support for X11 graphics only.
