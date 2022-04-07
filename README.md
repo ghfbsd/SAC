@@ -53,12 +53,21 @@ OS/hardware combination.  Otherwise, build it yourself from source.
 
 ## Contemporary versions
 
-| SAC/BRIS Release | MacOS Release | 
-| ---------------- | ------------- |
-| [grh-116]        | 11.6          |
-|                  | M1 X+mac      |
-| ---------------- | ------------- |
-| [grh-115](https://members.elsi.jp/~george/sac-bugs.html#grh115) | [Intel X+mac](https://members.elsi.jp/~george/MacSAC-grh115-10.9i.dmg) |
-| --- | --- |
-| [grh-114](https://members.elsi.jp/~george/sac-bugs.html#grh114) | [Intel X+mac](https://members.elsi.jp/~george/MacSAC-grh114-10.9i.dmg) |
-| --- | --- |
+| SAC/BRIS Release | 11.6 | 10.6- |
+| ---------------- | -----| ----- |
+| [grh-116](https://members.elsi.jp/~george/sac-bugs.html#grh115) | M1 X+mac | |
+| | | |
+| [grh-115](https://members.elsi.jp/~george/sac-bugs.html#grh115) | | [Intel X+mac](https://members.elsi.jp/~george/MacSAC-grh115-10.9i.dmg) |
+| | | |
+| [grh-114](https://members.elsi.jp/~george/sac-bugs.html#grh114) | | [Intel X+mac](https://members.elsi.jp/~george/MacSAC-grh114-10.9i.dmg) |
+| | | |
+
+### Glossary
+* Intel - Intel hardware.
+* X+mac - Support for both X11 graphics and native Mac graphics.
+* mac - Support for native Mac graphics ONLY. This means that you do NOT have to have X11 installed on your Mac in order to run SAC.
+* X - Support for X11 graphics only.
+* parallel - Support for parallel trace operations with OpenMP; sequential
+operations on traces, otherwise.  OpenMP support provided within the SAC
+libraries and neither gfortran nor OpenMP need be installed on your computer --
+at least that's the idea, so if OpenMP features don't work, report it as a bug!
