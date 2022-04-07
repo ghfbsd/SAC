@@ -67,7 +67,7 @@ OS/hardware combination.  Otherwise, build it yourself from source.
 | | | | |
 | [grh-111](https://members.elsi.jp/~george/sac-bugs.html#grh111) | | [Intel X+mac](http://www1.gly.bris.ac.uk/MacSAC/MacSAC-grh111-10.9j.dmg) | |
 | | | | |
-| [grh-110](https://members.elsi.jp/~george/sac-bugs.html#grh110) | | | [Intel X+mac parallel](http://www1.gly.bris.ac.uk/MacSAC/MacSAC-grh110-10.6jP.dmg) [Intel X+mac](http://www1.gly.bris.ac.uk/MacSAC/MacSAC-grh110-10.6i.dmg) | [Intel X+mac](http://www1.gly.bris.ac.uk/MacSAC/MacSAC-grh110-10.4i.dmg) [PPC   X+mac](http://www1.gly.bris.ac.uk/MacSAC/MacSAC-grh110-10.4p.dmg) |
+| [grh-110](https://members.elsi.jp/~george/sac-bugs.html#grh110) | | [Intel X+mac parallel](http://www1.gly.bris.ac.uk/MacSAC/MacSAC-grh110-10.6jP.dmg) [Intel X+mac](http://www1.gly.bris.ac.uk/MacSAC/MacSAC-grh110-10.6i.dmg) | [Intel X+mac](http://www1.gly.bris.ac.uk/MacSAC/MacSAC-grh110-10.4i.dmg) [PPC   X+mac](http://www1.gly.bris.ac.uk/MacSAC/MacSAC-grh110-10.4p.dmg) |
 
 
 ### Glossary
