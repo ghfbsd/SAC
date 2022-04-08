@@ -1,6 +1,6 @@
 # SAC[^rev]
 
-[^rev]: Revision 6
+[^rev]: Revision 7
 
 This is a repository where you can download binary distributions of the
 SAC/BRIS (also known as Mac SAC) for computers running MacOS.  If you are
@@ -22,18 +22,19 @@ University Press).
 Downloads are in the form of a MacOS disk image (folder) that you can mount
 and look inside of.  Generally, you will find an MacOS package to install and
 a separate uninstall app.  The `pkgutil --pkgs` command on MacOS will list the 
-packages that you have installed.  SAC is called, `uk.ac.bris.gly.sac`.  The
-uninstall app will uninstall SAC and, optionally, all record of having ever
+packages that you have installed.  For packaging purposes, SAC is called
+`uk.ac.bris.gly.sac`.  The uninstall app will uninstall SAC and, optionally,
+erase all knowledge of having ever
 had it installed.  After you install, you can close and throw away the disk
-image.  You can download it again later to get the uninstall app if you decide
-to get rid of SAC.
+image.  You can save and cherish it, or download it again later to get the
+uninstall app if you decide to get rid of SAC.
 
 MacOS has evolved through the years through different releases (Panther,
 Tiger, Leopard, ..., Big Sur, Monterey) and on different hardware
 (Motorola, PowerPC 32 and 64 bit, Intel 32 and 64 bit, and Apple (ARM)).
 Your download choice depends on the OS release and hardware you're running
-on, which, if you're unfamiliar with it, you can get from the `About this Mac`
-Apple menu item, and from the `uname -a` command.
+on, which, if you're unfamiliar with the details, you can get from the
+`About this Mac` Apple menu item, and from the `uname -a` command.
 
 ## Versions and Options
 
