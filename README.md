@@ -1,6 +1,6 @@
 # SAC[^rev]
 
-[^rev]: Revision 9
+[^rev]: Revision 10
 
 This is a repository where you can download binary distributions of the
 SAC/BRIS (also known as Mac SAC) for computers running MacOS.  If you are
@@ -58,7 +58,7 @@ OS/hardware combination.  Otherwise, build it yourself from source.
 
 | SAC/BRIS Release | 11.6 | 10.18-10.6 | 10.5-10.4 |
 | ---------------- | -----| ---------- | --------- |
-| [grh-116](https://members.elsi.jp/~george/sac-bugs.html#grh115) | [M1 X+mac](https://members.elsi.jp/~george/MacSAC-grh116-11.6a.dmg) | [Intel X+mac](https://members.elsi.jp/~george/sac-bugs.html#grh115)  | |
+| [grh-116](https://members.elsi.jp/~george/sac-bugs.html#grh116) | [M1 X+mac](https://members.elsi.jp/~george/MacSAC-grh116-11.6a.dmg) | [Intel X+mac](https://members.elsi.jp/~george/sac-bugs.html#grh116)  | |
 | | | | |
 | [grh-115](https://members.elsi.jp/~george/sac-bugs.html#grh115) | | [Intel X+mac](https://members.elsi.jp/~george/MacSAC-grh115-10.9i.dmg) | |
 | | | | |
