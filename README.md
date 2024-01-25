@@ -56,6 +56,8 @@ OS/hardware combination.  Otherwise, build it yourself from source.
 
 ## Contemporary versions
 
+Information about all of the releases may be found [here](https://members.elsi.jp/~george/sac-bugs.html#rel).
+
 | SAC/BRIS Release | 11.6 | 10.18-10.6 | 10.5-10.4 |
 | ---------------- | -----| ---------- | --------- |
 | [grh-116](https://members.elsi.jp/~george/sac-bugs.html#grh116) | [M1 X+mac](https://members.elsi.jp/~george/MacSAC-grh116-11.6a.dmg) | [Intel X+mac](https://members.elsi.jp/~george/sac-bugs.html#grh116)  | |
