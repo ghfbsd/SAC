@@ -1,6 +1,6 @@
 # SAC[^rev]
 
-[^rev]: Revision 11
+[^rev]: Revision 12
 
 This is a repository where you can download binary distributions of the
 SAC/BRIS (also known as Mac SAC) for computers running MacOS.  If you are
@@ -17,7 +17,7 @@ via SAC and download data.  (These features will be added in a future release.)
 SAC/BRIS is documented in the book, *The Seismic Analysis Code* (Cambridge
 University Press).
 
-# Downloading
+# Downloading and Installing
 
 Downloads are in the form of a MacOS disk image (folder) that you can mount
 and look inside of.  Generally, you will find an MacOS package to install and
@@ -28,6 +28,14 @@ erase all knowledge of having ever
 had it installed.  After you install, you can close and throw away the disk
 image.  You can save and cherish it, or download it again later to get the
 uninstall app if you decide to get rid of SAC.
+
+If your Mac won't let you install from unknown .dmg (disk image) files,
+temporarily turn off enforcement of this rule from the command line:
+`sudo spctl --master-disable`
+which will allow you to see and check "Anywhere" from the
+System Preferences -> Security & Privacy "General" menu.
+After installing, you might want to revert to the original protection level
+by re-enabling checks: `sudo spctl --master-enable`
 
 MacOS has evolved through the years through different releases (Panther,
 Tiger, Leopard, ..., Big Sur, Monterey) and on different hardware

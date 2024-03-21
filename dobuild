@@ -1,0 +1,156 @@
+#!/usr/bin/env bash
+# Builds SAC/BRIS from source code.  This script assumes use of GNU make.
+# Also assumes presence of:
+#    f77/g77/gfortran/Fortran compiler with legacy source format compatibility
+#    C compiler
+#    X11 and Athena widget set (with header files, aka "development version")
+#
+# Two optional command line parameters:
+#    <installdir> <release> <configure-options>
+#
+#    installdir - installation directory.  SAC programs will be installed
+#       in <installdir>/bin and libraries in <installdir>/lib and library
+#       files in <installdir>/lib/aux.  (default: /usr/local)
+#    release - release number (e.g. 109) (default: 114)
+#    configure-options - additional configure options (from set below)
+#
+# This builds a default system.  Custom builds would modify the configure
+# stage.  Useful custom build features:
+#   --disable-opt           compiles programs with optimization disabled
+#   --enable-debug          compiles programs with debugging enabled
+#   --enable-static         compiles statically-linked binaries
+#   --without-readline      compiles with readline disabled
+#   --without-openmp        compiles with OpenMP disabled
+#   --without-libxml        compiles without use of XML libraries
+#   --without-x             compiles without X-windows support
+#
+# G. Helffrich/U Bristol 21 Feb. 2013
+#   last update 26 Mar. 2022
+
+loc=${1:-/usr/local} ver=${2:-116} tmp=/tmp/tmp$$ dir=/tmp/sacbuild
+
+md5sum=d3a73c9f391a1215fd2950ddf6a6805c      # Source
+md5sum109=447ad580c8f671e817a19e4a92deb950   # r109
+md5sum110=4a998b5b8bbd12e8d0f8a05ca9848dbc   # r110
+md5sum111=bcc4222de4a75f894062916241f32808   # r111
+md5sum112=bef581c3e396caf188dbf8f3f9b19191   # r112
+md5sum113=54684dccade79b07a79714a86b4b2f86   # r113
+md5sum114=3dadc36fa6352cddb9e383ca51b4b95b   # r114
+md5sum115=b58b564a71ccaa9649e30d41c19f7cdd   # r115
+md5sum116=023ba5758efaeb9eed601d89a83db989   # r116
+
+function path() {
+   ## path XX - Check path for XX, print if present
+   for d in `echo $PATH | awk -F: '{for(i=1;i<=NF;i++)print $(i)}'` ; do
+      [ -x $d/$1 ] && echo $d/$1 && return
+   done
+}
+
+# Check release is recognized
+if [ -z `eval echo \\$md5sum${ver}` ]; then
+   echo "**Invalid release: ${ver}; re-specify."
+   exit 1
+fi
+
+# Build system description triple
+sysid=`uname -p -r -s | sed -e 's;-;+;g' | awk '{printf "%s-%s-%s",$1,$2,$3}'`
+case $sysid in
+   Darwin-*-powerpc) conf='FFLAGS=-m32' ;;
+   Darwin-[678]*-i386)  conf='FFLAGS=-m32' ;;
+   Darwin-9*-i386 | Darwin-10*-i386)
+      conf='FFLAGS=-m64' ;;
+   Darwin-1[12]*-i386)
+      conf='FFLAGS=-m64 LDFLAGS=-Wl,-no_pie'
+      conf="${conf} --x-includes=/opt/X11/include --x-libraries=/opt/X11/lib" ;;
+   Darwin-1[3-6]*-i386)
+      conf='FFLAGS=-m64 LDFLAGS=-Wl,-no_pie' ;;
+   Darwin-1[7-9]*-i386)
+      conf='FFLAGS=-m64 LDFLAGS=-Wl,-no_pie --without-libxml' ;;
+   Darwin-2*-i386)
+      conf='FFLAGS=-m64 LDFLAGS=-Wl,-no_pie --without-libxml' ;;
+   *) conf='FFLAGS=-m64' ;;
+esac
+
+case $ver in
+   109) : ;;                              ## Nothing done
+   *) conf="${conf} --disable-static" ;;  ## Static Fortran link usually broken
+esac
+
+# Add any further configuration flags
+shift 2 || shift 1; conf="${conf} $*"
+
+echo
+echo "Building with configure flags '${conf}' for ${sysid}"
+echo
+
+# Check that build directory does not already exist; make anew if so
+[ -d $dir ] && rm -rf $dir
+mkdir $dir
+
+PDIR=$PWD ; cd $dir
+fn=https://www1.gly.bris.ac.uk/MacSAC/sac-10.6d.tgz
+if [ ! -z `path curl` ] ; then
+   curl ${fn} > $tmp.src.tgz
+elif [ ! -z `path wget` ] ; then
+   wget -O - ${fn} > $tmp.src.tgz
+else
+   echo "**No curl or wget command on your system -- install one and retry"
+   exit 1
+fi
+if [ ! -z `path md5` ] ; then
+   md5src=`md5 -q $tmp.src.tgz`
+   if [ $md5src != $md5sum ] ; then
+      echo "**Source checksum mismatch; corrupted download?"
+      echo "**  Actual checksum is ${md5src}"; exit 1
+   fi
+fi
+
+case $ver in
+   11[456]) fn=https://members.elsi.jp/~george/sac-10.6dr${ver}.tgz ;;
+   *)   fn=https://www1.gly.bris.ac.uk/MacSAC/sac-10.6dr${ver}.tgz ;;
+esac
+if [ ! -z `path curl` ] ; then
+   curl ${fn} > $tmp.pch.tgz
+else
+   wget -O - ${fn} > $tmp.pch.tgz
+fi
+if [ ! -z `path md5` ] ; then
+   md5exp=`eval echo \\$md5sum${ver}` md5pch=`md5 -q $tmp.pch.tgz`
+   if [ $md5pch != $md5exp ] ; then
+      echo "**Patch checksum mismatch; corrupted download?"
+      echo "**  Actual checksum is ${md5pch}"; exit 1
+   fi
+fi
+
+# Unpack source code and patches; apply patches.
+tar xfz $tmp.src.tgz; tar xfz $tmp.pch.tgz
+cd sac-10.6d
+chmod -R u+rw .
+patch -p1 < ../patch/sac-${ver}.diff
+if [ ! -f configure ]; then
+   echo "**Patch process failed.  Verify patch command functionality."
+   exit 1
+fi
+sed -i -e 's|-grh|/BRIS|' src/top/initsac.f
+sed -i -e "s|SACVER|'-${ver}'|" src/top/initsac.f
+sed -i -e 's|Copyright 1991 Regents of the University of California|See COPYRIGHT for information.|' src/top/initsac.f
+cp -R ../taup/utils/taup utils
+cp -R ../gd4/Contents src/gd4.app
+rm -rf ../taup ../gd4 ../patch
+rm -f aux/fgdata.sdf .gdb_history
+
+# Configure and build
+chmod ugo+rx ./configure src/evalresp-*/configure
+./configure ${conf} --prefix=${loc} --exec-prefix=${loc}
+
+# Prepare destination directory
+[ -d $loc ] || mkdir $loc || \
+   { echo "**Unable to make ${loc}; install aborted" ; exit 1 ; }
+
+# Build
+unset SACAUX                              ## Can cause problems with make if set
+make install prefix=${loc}
+
+# Clean up source code build directories
+rm -rf ../taup ../gd4 ../patch
+cd $PDIR ; rm -rf ${dir} $tmp.pch.tgz $tmp.src.tgz

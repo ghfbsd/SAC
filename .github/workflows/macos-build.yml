@@ -1,0 +1,22 @@
+name: MacOS source build
+run-name: MacOS source build
+on: [push]
+jobs:
+   Source-build:
+     runs-on: macos-latest
+     steps:
+     - name: Check out repository
+       uses: actions/checkout@v4
+     - name: Do build
+       shell: bash
+       run: |
+          sh dobuild 2>&1 > build.out
+          if [ -f /usr/local/bin/sac ] ; then
+             /usr/local/bin/sac << EOF > prog.out
+             message "build successful"
+             quit
+             EOF
+             echo 'Build success:' | cat - prog.out >> $GITHUB_STEP_SUMMARY
+          else
+             echo 'Build fail' >> $GITHUB_STEP_SUMMARY
+          fi
