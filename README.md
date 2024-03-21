@@ -58,9 +58,9 @@ OS/hardware combination.  Otherwise, build it yourself from source.
 
 Information about all of the releases may be found [here](https://members.elsi.jp/~george/sac-bugs.html#rel).
 
-| SAC/BRIS Release | 11.6 | 10.18-10.6 | 10.5-10.4 |
+| SAC/BRIS Release | 11.6 | 10.9-10.6 | 10.5-10.4 |
 | ---------------- | -----| ---------- | --------- |
-| [grh-116](https://members.elsi.jp/~george/sac-bugs.html#grh116) | [M1 X+mac](https://members.elsi.jp/~george/MacSAC-grh116-11.6a.dmg) | [Intel X+mac](https://members.elsi.jp/~george/sac-bugs.html#grh116)  | |
+| [grh-116](https://members.elsi.jp/~george/sac-bugs.html#grh116) | [M1 X+mac](https://raw.githubusercontent.com/ghfbsd/SAC/rels/MacSAC-grh116-11.6a.dmg) | [Intel X+mac](https://raw.githubusercontent.com/ghfbsd/SAC/rels/MacSAC-grh116-10.9j)  | |
 | | | | |
 | [grh-115](https://members.elsi.jp/~george/sac-bugs.html#grh115) | | [Intel X+mac](https://members.elsi.jp/~george/MacSAC-grh115-10.9i.dmg) | |
 | | | | |
