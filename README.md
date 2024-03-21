@@ -1,6 +1,6 @@
 # SAC[^rev]
 
-[^rev]: Revision 10
+[^rev]: Revision 11
 
 This is a repository where you can download binary distributions of the
 SAC/BRIS (also known as Mac SAC) for computers running MacOS.  If you are
