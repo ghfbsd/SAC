@@ -27,7 +27,15 @@
 # G. Helffrich/U Bristol 21 Feb. 2013
 #   last update 26 Mar. 2022
 
-loc=${1:-/usr/local} ver=${2:-116} tmp=/tmp/tmp$$ dir=/tmp/sacbuild
+locdef=/usr/local verdef=116 tmp=/tmp/tmp$$ dir=/tmp/sacbuild
+loc=${1:-${locdef}} ver=${2:-${verdef}}
+if [ "${loc}" == '--' ]; then
+   loc=${locdef}; shift 1
+elif [ "${ver}" == '--' ]; then
+   ver=${verdef}; shift 2
+elif [ "${3}" == '--' ]; then
+   shift 3
+fi
 
 md5sum=d3a73c9f391a1215fd2950ddf6a6805c      # Source
 md5sum109=447ad580c8f671e817a19e4a92deb950   # r109
@@ -77,7 +85,7 @@ case $ver in
 esac
 
 # Add any further configuration flags
-shift 2 || shift 1; conf="${conf} $*"
+conf="${conf} $*"
 
 echo
 echo "Building with configure flags '${conf}' for ${sysid}"

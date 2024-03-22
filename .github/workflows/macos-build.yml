@@ -11,7 +11,7 @@ jobs:
        shell: bash
        run: |
           brew install xquartz --cask
-          sh dobuild /usr/local 116 F77=gfortran-11 CC=gcc-11
+          sh dobuild -- F77=gfortran-11 CC=gcc-11
      - name: Test for success
        shell: bash
        run: |
