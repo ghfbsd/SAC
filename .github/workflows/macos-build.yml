@@ -3,8 +3,8 @@ run-name: MacOS source build
 on:
    push:
      paths:
-     - dobuild
-     - **.yml
+     - 'dobuild'
+     - '**.yml'
 jobs:
    Source-build:
      runs-on: macos-latest
