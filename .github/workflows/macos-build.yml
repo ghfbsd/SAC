@@ -14,7 +14,7 @@ jobs:
           #sh dobuild /usr/local 116 F77=gfortran-11 CC=gcc-11 2>&1 > build.out
           sh dobuild /usr/local 116 F77=gfortran-11 CC=gcc-11
           if [ -f /usr/local/bin/sac ] ; then
-             /usr/local/bin/sac << EOF > prog.out
+             /usr/local/bin/sac <<- EOF > prog.out
              message "build successful"
              quit
              EOF
