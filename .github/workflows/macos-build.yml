@@ -16,10 +16,8 @@ jobs:
        shell: bash
        run: |
           if [ -f /usr/local/bin/sac ] ; then
-             /usr/local/bin/sac <<- EOF > prog.out
-             message "build successful"
-             quit
-             EOF
+             ( echo 'message "build successful"' ; echo 'quit' ) |
+                 /usr/local/bin/sac > prog.out
              echo 'Build success:' | cat - prog.out >> $GITHUB_STEP_SUMMARY
           else
              echo 'Build fail' >> $GITHUB_STEP_SUMMARY
