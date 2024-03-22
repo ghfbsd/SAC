@@ -10,7 +10,7 @@ jobs:
      - name: Do build
        shell: bash
        run: |
-          brew --cask install xquartz
+          brew install xquartz --cask
           sh dobuild /usr/local 116 F77=gfortran-11 CC=gcc-11 2>&1 > build.out
           if [ -f /usr/local/bin/sac ] ; then
              /usr/local/bin/sac << EOF > prog.out
