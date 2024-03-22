@@ -10,8 +10,7 @@ jobs:
      - name: Do build
        shell: bash
        run: |
-          alias gfortran=gfortran-11 gcc=gcc-11
-          sh dobuild 2>&1 > build.out
+          sh dobuild /usr/local 116 FC=gfortran-11 CC=gcc-11 2>&1 > build.out
           if [ -f /usr/local/bin/sac ] ; then
              /usr/local/bin/sac << EOF > prog.out
              message "build successful"
