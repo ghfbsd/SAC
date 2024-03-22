@@ -11,8 +11,10 @@ jobs:
        shell: bash
        run: |
           brew install xquartz --cask
-          #sh dobuild /usr/local 116 F77=gfortran-11 CC=gcc-11 2>&1 > build.out
           sh dobuild /usr/local 116 F77=gfortran-11 CC=gcc-11
+     - name: Test for success
+       shell: bash
+       run: |
           if [ -f /usr/local/bin/sac ] ; then
              /usr/local/bin/sac <<- EOF > prog.out
              message "build successful"
