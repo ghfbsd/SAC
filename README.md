@@ -1,14 +1,14 @@
 # SAC[^rev]
 
-[^rev]: Revision 12
+[^rev]: Revision 13
 
 This is a repository where you can download binary distributions of the
 SAC/BRIS (also known as Mac SAC) for computers running MacOS.  If you are
 not running MacOS, you need to compile SAC yourself by installing it from
 source.  An automated script to do this can be found
-[here](https://members.elsi.jp/~george/dobuild.sh); this is a shell script
-that downloads, patches and compiles the source code based on educated guesses
-about your system.
+[here](https://raw.githubusercontent.com/ghfbsd/SAC/main/dobuild);
+this is a shell script that downloads, patches and compiles the source code
+based on educated guesses about your system.
 
 SAC/BRIS is based on the 10.6d source code, updated to equivalent functionality
 as 10.6f, and extended from there.  It is compatible with IRIS's SAC (except
@@ -68,7 +68,7 @@ Information about all of the releases may be found [here](https://members.elsi.j
 
 | SAC/BRIS Release | 11.6 | 10.9-10.6 | 10.5-10.4 |
 | ---------------- | -----| ---------- | --------- |
-| [grh-116](https://members.elsi.jp/~george/sac-bugs.html#grh116) | [M1 X+mac](https://raw.githubusercontent.com/ghfbsd/SAC/rels/MacSAC-grh116-11.6a.dmg) | [Intel X+mac](https://raw.githubusercontent.com/ghfbsd/SAC/rels/MacSAC-grh116-10.9j)  | |
+| [grh-116](https://members.elsi.jp/~george/sac-bugs.html#grh116) | [M1 X+mac](https://raw.githubusercontent.com/ghfbsd/SAC/rels/MacSAC-grh116-11.6a.dmg) | [Intel X+mac](https://raw.githubusercontent.com/ghfbsd/SAC/rels/MacSAC-grh116-10.9j.dmg)  | |
 | | | | |
 | [grh-115](https://members.elsi.jp/~george/sac-bugs.html#grh115) | | [Intel X+mac](https://members.elsi.jp/~george/MacSAC-grh115-10.9i.dmg) | |
 | | | | |
