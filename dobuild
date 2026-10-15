@@ -137,7 +137,7 @@ fi
 tar xfz $tmp.src.tgz; tar xfz $tmp.pch.tgz
 cd sac-10.6d
 chmod -R u+rw .
-patch -p1 < ../patch/sac-${ver}.diff
+patch -p1 -E < ../patch/sac-${ver}.diff
 if [ ! -f configure ]; then
    echo "**Patch process failed.  Verify patch command functionality."
    exit 1
