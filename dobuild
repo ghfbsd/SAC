@@ -29,11 +29,11 @@
 
 locdef=/usr/local verdef=116 tmp=/tmp/tmp$$ dir=/tmp/sacbuild
 loc=${1:-${locdef}} ver=${2:-${verdef}}
-if [ "${loc}" == '--' ]; then
+if [ "${loc}" = '--' ]; then
    loc=${locdef} ver=${verdef}; shift 1
-elif [ "${ver}" == '--' ]; then
+elif [ "${ver}" = '--' ]; then
    ver=${verdef}; shift 2
-elif [ "${3}" == '--' ]; then
+elif [ "${3}" = '--' ]; then
    shift 3
 fi
 
