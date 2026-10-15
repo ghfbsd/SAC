@@ -24,13 +24,13 @@ jobs:
           brew install gfortran
           cc -v
           gfortran -v
-          ./dobuild    # -- F77=gfortran-11 CC=gcc-11
+          ./dobuild sac-test   # -- F77=gfortran-11 CC=gcc-11
      - name: Test for success
        shell: bash
        run: |
-          if [ -f /usr/local/bin/sac ] ; then
+          if [ -f sac-test/bin/sac ] ; then
              ( echo 'message "build successful"' ; echo 'quit' ) |
-                 /usr/local/bin/sac > prog.out
+                 sac-test/bin/sac > prog.out
              echo 'Build success:' | cat - prog.out >> $GITHUB_STEP_SUMMARY
           else
              echo 'Build fail' >> $GITHUB_STEP_SUMMARY
