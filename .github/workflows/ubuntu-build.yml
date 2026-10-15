@@ -1,0 +1,37 @@
+name: Ubuntu source build
+
+on:
+  push:
+    branches:
+    - 'admin'
+    paths:
+    - 'dobuild'
+    - '**.yml'
+
+jobs:
+  Source-build:
+
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y gfortran
+        sudo apt install -y gcc
+        sudo apt install -y libx11-dev
+    - name: Compile sources
+      run: |
+        gfortran --version
+        sh dobuild -- F77=gfortran CC=gcc
+    - name: Test for success
+      shell: bash
+      run: |
+         if [ -f /usr/local/bin/sac ] ; then
+            ( echo 'message "build successful"' ; echo 'quit' ) |
+                /usr/local/bin/sac > prog.out
+            echo 'Build success:' | cat - prog.out >> $GITHUB_STEP_SUMMARY
+         else
+            echo 'Build fail' >> $GITHUB_STEP_SUMMARY
+         fi
