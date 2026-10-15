@@ -25,7 +25,7 @@ jobs:
       shell: bash
       run: |
         gfortran --version
-        sh dobuild -- F77=gfortran CC=gcc
+        ./dobuild -- F77=gfortran CC=gcc
     - name: Test for success
       shell: bash
       run: |
