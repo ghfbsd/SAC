@@ -22,6 +22,7 @@ jobs:
         sudo apt install -y gcc
         sudo apt install -y libx11-dev
     - name: Compile sources
+      shell: bash
       run: |
         gfortran --version
         sh dobuild -- F77=gfortran CC=gcc
