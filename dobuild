@@ -11,7 +11,7 @@
 #    installdir - installation directory.  SAC programs will be installed
 #       in <installdir>/bin and libraries in <installdir>/lib and library
 #       files in <installdir>/lib/aux.  (default: /usr/local)
-#    release - release number (e.g. 109) (default: 116)
+#    release - release number (e.g. 109) (default: 117)
 #    configure-options - additional configure options (from set below)
 #
 # This builds a default system.  Custom builds would modify the configure
@@ -25,9 +25,9 @@
 #   --without-x             compiles without X-windows support
 #
 # G. Helffrich/U Bristol 21 Feb. 2013
-#   last update 14 Oct. 2026
+#   last update 15 Oct. 2026
 
-locdef=/usr/local verdef=116 tmp=/tmp/tmp$$ dir=/tmp/sacbuild
+locdef=/usr/local verdef=117 tmp=/tmp/tmp$$ dir=/tmp/sacbuild
 loc=${1:-${locdef}} ver=${2:-${verdef}}
 if [ "${loc}" = '--' ]; then
    loc=${locdef} ver=${verdef}; shift 1
@@ -46,6 +46,7 @@ md5sum113=54684dccade79b07a79714a86b4b2f86   # r113
 md5sum114=3dadc36fa6352cddb9e383ca51b4b95b   # r114
 md5sum115=b58b564a71ccaa9649e30d41c19f7cdd   # r115
 md5sum116=023ba5758efaeb9eed601d89a83db989   # r116
+md5sum117=d6e158706800bc45f49842b3926dd31b   # r117
 
 function path() {
    ## path XX - Check path for XX, print if present
@@ -116,7 +117,7 @@ if [ ! -z `path md5` ] ; then
 fi
 
 case $ver in
-   11[456]) fn=https://members.elsi.jp/~george/sac-10.6dr${ver}.tgz ;;
+   11[4567]) fn=https://members.elsi.jp/~george/sac-10.6dr${ver}.tgz ;;
    *)   fn=https://www1.gly.bris.ac.uk/MacSAC/sac-10.6dr${ver}.tgz ;;
 esac
 if [ ! -z `path curl` ] ; then
