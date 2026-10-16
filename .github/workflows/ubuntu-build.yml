@@ -21,12 +21,11 @@ jobs:
         sudo apt install -y gfortran
         sudo apt install -y gcc
         sudo apt install -y libx11-dev
-        sudo apt install -y libxaw7
-        sudo apt install -y libxmu6
-        sudo apt install -y libxext6
-        sudo apt install -y libxt6t64
-        sudo ldconfig -v
-        find /usr/lib -type f -name '*lib[xX]*' -print
+        sudo apt install -y libxaw7-dev
+        sudo apt install -y libxmu6-dev
+        sudo apt install -y libxext6-dev
+        sudo apt install -y libxt6t64-dev
+        sudo ldconfig
     - name: Compile sources
       shell: bash
       run: |
