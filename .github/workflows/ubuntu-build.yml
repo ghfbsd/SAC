@@ -22,9 +22,9 @@ jobs:
         sudo apt install -y gcc
         sudo apt install -y libx11-dev
         sudo apt install -y libxaw7-dev
-        sudo apt install -y libxmu6-dev
-        sudo apt install -y libxext6-dev
-        sudo apt install -y libxt6t64-dev
+        sudo apt install -y libxmu-dev
+        sudo apt install -y libxext-dev
+        sudo apt install -y libxt-dev
         sudo ldconfig
     - name: Compile sources
       shell: bash
