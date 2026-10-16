@@ -25,6 +25,7 @@ jobs:
         sudo apt install -y libxmu6
         sudo apt install -y libxext6
         sudo apt install -y libxt6t64
+        find /usr/lib -type f -name '*lib[xX]*' -print
     - name: Compile sources
       shell: bash
       run: |
