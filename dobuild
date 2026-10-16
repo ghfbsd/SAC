@@ -91,8 +91,11 @@ case $sysid in
       conf="${conf} --disable-static" ;;
    Darwin-*-arm)
       FFLAGS=-m64 conf='--without-libxml --disable-static' ;;
+   Linux-*-x86_64)
+      FFLAGS=-m64
+      conf='CFLAGS=-fcommon --x-libraries=/usr/lib/x86_64-linux-gnu/' ;;
    Linux-*-*)
-      FFLAGS='-m64 -fcommon' ;;
+      FFLAGS=-m64 ;;
    *) FFLAGS=-m64 ;;
 esac
 
