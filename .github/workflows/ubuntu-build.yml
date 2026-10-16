@@ -21,11 +21,14 @@ jobs:
         sudo apt install -y gfortran
         sudo apt install -y gcc
         sudo apt install -y libx11-dev
+        sudo apt install -y libxaw7
+        sudo apt install -y libxmu6
+        sudo apt install -y libxext6
+        sudo apt install -y libxt6t64
     - name: Compile sources
       shell: bash
       run: |
         gfortran --version
-        find /usr/lib -type f -name '*libX11*' -ls
         ./dobuild $PWD/sac-test -- F77=gfortran CC=gcc
     - name: Test for success
       shell: bash
