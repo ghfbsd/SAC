@@ -164,6 +164,7 @@ rm -f aux/fgdata.sdf .gdb_history
 # Configure and build
 chmod ugo+rx ./configure src/evalresp-*/configure
 ./configure FFLAGS="${FFLAGS}" LDFLAGS="${LDFLAGS}" ${conf} \
+   X_PRE_LIBS='-Wl,-Bdynamic -lXaw7' \
    --prefix=${loc} --exec-prefix=${loc} $*
 cat config.log > /tmp/config.log
 
