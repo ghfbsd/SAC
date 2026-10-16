@@ -11,7 +11,7 @@ on:
 jobs:
   Source-build:
 
-    runs-on: ubuntu-22.04-arm
+    runs-on: ubuntu-24.04-arm
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -35,4 +35,5 @@ jobs:
             echo 'Build success:' | cat - prog.out >> $GITHUB_STEP_SUMMARY
          else
             echo 'Build fail' >> $GITHUB_STEP_SUMMARY
+            cat /tmp/sacbuild/sac-10.6d/config.log >> $GITHUB_STEP_SUMMARY
          fi
