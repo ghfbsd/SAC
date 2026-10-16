@@ -86,7 +86,7 @@ case $sysid in
    Darwin-*-arm)
       conf='FFLAGS=-m64 --without-libxml --disable-static' ;;
    Linux-*-*)
-      conf='FFLAGS="-m64 -fcommon"' ;;
+      conf=$'FFLAGS=\'-m64 -fcommon\'' ;;
    *) conf='FFLAGS=-m64' ;;
 esac
 
@@ -111,8 +111,10 @@ else
    echo "**No curl or wget command on your system -- install one and retry"
    exit 1
 fi
-if [ ! -z `path md5` ] ; then
-   md5src=`md5 -q $tmp.src.tgz`
+[ ! -z $(path md5) ] && MD5=md5 || MD5=
+[ -z "$MD5" ] && [ ! -z $(path md5sum) ] && MD5=md5sum
+if [ ! -z $MD5 ] ; then
+   md5src=$($MD5 -q $tmp.src.tgz)
    if [ $md5src != $md5sum ] ; then
       echo "**Source checksum mismatch; corrupted download?"
       echo "**  Actual checksum is ${md5src}"; exit 1
