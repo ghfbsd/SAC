@@ -25,7 +25,7 @@
 #   --without-x             compiles without X-windows support
 #
 # G. Helffrich/U Bristol 21 Feb. 2013
-#   last update 15 Oct. 2026
+#   last update 16 Oct. 2026
 
 locdef=/usr/local verdef=117 tmp=/tmp/tmp$$ dir=/tmp/sacbuild
 loc=${1:-${locdef}} ver=${2:-${verdef}}
@@ -48,7 +48,7 @@ md5sum113=54684dccade79b07a79714a86b4b2f86   # r113
 md5sum114=3dadc36fa6352cddb9e383ca51b4b95b   # r114
 md5sum115=b58b564a71ccaa9649e30d41c19f7cdd   # r115
 md5sum116=023ba5758efaeb9eed601d89a83db989   # r116
-md5sum117=7e9a256fa388df7f8234c091ba32b894   # r117
+md5sum117=b95e27f0401413c990fa8badf41ae73c   # r117
 
 function path() {
    ## path XX - Check path for XX, print if present
