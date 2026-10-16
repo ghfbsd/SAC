@@ -57,6 +57,11 @@ function path() {
    done
 }
 
+function MD5like() {
+   ## Output like md5 -q XX
+   md5sum --tag $1 | awk '{print $(NF)}'
+}
+
 # Check release is recognized
 if [ -z `eval echo \\$md5sum${ver}` ]; then
    echo "**Invalid release: ${ver}; re-specify."
@@ -66,32 +71,33 @@ fi
 # Build system description triple
 sysid=$(uname -p -r -s | sed -e 's;-;+;g' | awk '{printf "%s-%s-%s",$1,$2,$3}')
 echo "Build for ${sysid}"
+FFLAGS= LDFLAGS= conf=
 case $sysid in
-   Darwin-*-powerpc) conf='FFLAGS=-m32' ;;
-   Darwin-[678]*-i386)  conf='FFLAGS=-m32' ;;
+   Darwin-*-powerpc) FFLAGS=-m32 ;;
+   Darwin-[678]*-i386)  FFLAGS=-m32 ;;
    Darwin-9*-i386 | Darwin-10*-i386)
-      conf='FFLAGS=-m64' ;;
+      FFLAGS=-m64 ;;
    Darwin-1[12]*-i386)
-      conf='FFLAGS=-m64 LDFLAGS=-Wl,-no_pie'
-      conf="${conf} --disable-static"
+      FFLAGS=-m64 LDFLAGS=-Wl,-no_pie
+      conf="--disable-static"
       conf="${conf} --x-includes=/opt/X11/include --x-libraries=/opt/X11/lib" ;;
    Darwin-1[3-6]*-i386)
-      conf='FFLAGS=-m64 LDFLAGS=-Wl,-no_pie --disable-static' ;;
+      FFLAGS=-m64 LDFLAGS=-Wl,-no_pie conf='--disable-static' ;;
    Darwin-1[7-9]*-i386)
-      conf='FFLAGS=-m64 LDFLAGS=-Wl,-no_pie --without-libxml'
+      FFLAGS=-m64 LDFLAGS=-Wl,-no_pie conf='--without-libxml'
       conf="${conf} --disable-static" ;;
    Darwin-2*-i386)
-      conf='FFLAGS=-m64 LDFLAGS=-Wl,-no_pie --without-libxml'
+      FFLAGS=-m64 LDFLAGS=-Wl,-no_pie conf='--without-libxml'
       conf="${conf} --disable-static" ;;
    Darwin-*-arm)
-      conf='FFLAGS=-m64 --without-libxml --disable-static' ;;
+      FFLAGS=-m64 conf='--without-libxml --disable-static' ;;
    Linux-*-*)
-      conf='FFLAGS=\"-m64 -fcommon\"' ;;
-   *) conf='FFLAGS=-m64' ;;
+      FFLAGS='-m64 -fcommon' ;;
+   *) FFLAGS=-m64 ;;
 esac
 
 echo
-echo "Building with configure flags '${conf} $*' for ${sysid}"
+echo "Building with configure flags 'FFLAGS=${FFLAGS} LDFLAGS=${LDFLAGS} ${conf} $*' for ${sysid}"
 echo
 
 # Check that build directory does not already exist; make anew if so
@@ -109,7 +115,7 @@ else
    exit 1
 fi
 [ ! -z $(path md5) ] && MD5='md5 -q' || MD5=
-[ -z "$MD5" ] && [ ! -z $(path md5sum) ] && MD5=md5sum
+[ -z "$MD5" -a ! -z $(path md5sum) ] && MD5=MD5like
 if [ ! -z "$MD5" ] ; then
    md5src=$($MD5 $tmp.src.tgz)
    if [ ! $md5src = $md5sum ] ; then
@@ -154,7 +160,8 @@ rm -f aux/fgdata.sdf .gdb_history
 
 # Configure and build
 chmod ugo+rx ./configure src/evalresp-*/configure
-./configure ${conf} --prefix=${loc} --exec-prefix=${loc} $*
+./configure FFLAGS="${FFLAGS}" LDFLAGS="${LDFLAGS}" ${conf} \
+   --prefix=${loc} --exec-prefix=${loc} $*
 
 # Prepare destination directory
 [ -d $loc ] || mkdir -p $loc || \
