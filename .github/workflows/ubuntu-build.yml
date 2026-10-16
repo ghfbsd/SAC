@@ -27,9 +27,10 @@ jobs:
         gfortran --version
         ./dobuild $PWD/sac-test -- F77=gfortran CC=gcc
         [ -f sac-test/bin/sac ] || (
-           echo 'Build fail' >> $GITHUB_STEP_SUMMARY
-           find . /tmp -type f -name config.log -exec cat {} \; >> $GITHUB_STEP_SUMMARY
-        )
+           echo 'Build fail'
+           echo
+           find . /tmp -type f -name config.log -print -exec cat {} \;
+        ) >> $GITHUB_STEP_SUMMARY
     - name: Test for success
       shell: bash
       run: |
