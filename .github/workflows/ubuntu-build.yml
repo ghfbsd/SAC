@@ -25,8 +25,8 @@ jobs:
       shell: bash
       run: |
         gfortran --version
-        find /usr/lib -type f -name '*libX11*' -print
-        # ./dobuild $PWD/sac-test -- F77=gfortran CC=gcc
+        find /usr/lib -type f -name '*libX11*' -ls
+        ./dobuild $PWD/sac-test -- F77=gfortran CC=gcc
     - name: Test for success
       shell: bash
       run: |
