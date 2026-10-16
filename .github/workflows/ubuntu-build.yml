@@ -26,6 +26,10 @@ jobs:
       run: |
         gfortran --version
         ./dobuild $PWD/sac-test -- F77=gfortran CC=gcc
+        [ -f sac-test/bin/sac ] || (
+           echo 'Build fail' >> $GITHUB_STEP_SUMMARY
+           cat /tmp/sacbuild/sac-10.6d/config.log >> $GITHUB_STEP_SUMMARY
+        )
     - name: Test for success
       shell: bash
       run: |
@@ -33,7 +37,4 @@ jobs:
             ( echo 'message "build successful"' ; echo 'quit' ) |
                 sac-test/bin/sac > prog.out
             echo 'Build success:' | cat - prog.out >> $GITHUB_STEP_SUMMARY
-         else
-            echo 'Build fail' >> $GITHUB_STEP_SUMMARY
-            cat /tmp/sacbuild/sac-10.6d/config.log >> $GITHUB_STEP_SUMMARY
          fi
