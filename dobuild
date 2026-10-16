@@ -64,7 +64,8 @@ if [ -z `eval echo \\$md5sum${ver}` ]; then
 fi
 
 # Build system description triple
-sysid=`uname -p -r -s | sed -e 's;-;+;g' | awk '{printf "%s-%s-%s",$1,$2,$3}'`
+sysid=$(uname -p -r -s | sed -e 's;-;+;g' | awk '{printf "%s-%s-%s",$1,$2,$3}')
+echo "Build for ${sysid}"
 case $sysid in
    Darwin-*-powerpc) conf='FFLAGS=-m32' ;;
    Darwin-[678]*-i386)  conf='FFLAGS=-m32' ;;
@@ -81,7 +82,7 @@ case $sysid in
       conf='FFLAGS=-m64 LDFLAGS=-Wl,-no_pie --without-libxml' ;;
    Darwin-*-arm)
       conf='FFLAGS=-m64 --without-libxml' ;;
-   *) conf='FFLAGS=-m64' ;;
+   *) conf='FFLAGS=-m64 LDFLAGS=-Wl,-fcommon' ;;
 esac
 
 case $ver in
