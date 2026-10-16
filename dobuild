@@ -86,7 +86,7 @@ case $sysid in
    Darwin-*-arm)
       conf='FFLAGS=-m64 --without-libxml --disable-static' ;;
    Linux-*-*)
-      conf=$'FFLAGS=\'\"-m64 -fcommon\"\'' ;;
+      conf=$'FFLAGS=\"-m64 -fcommon\"' ;;
    *) conf='FFLAGS=-m64' ;;
 esac
 
