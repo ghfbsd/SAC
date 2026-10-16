@@ -86,7 +86,7 @@ case $sysid in
    Darwin-*-arm)
       conf='FFLAGS=-m64 --without-libxml --disable-static' ;;
    Linux-*-*)
-      conf=$'FFLAGS=\"-m64 -fcommon\"' ;;
+      conf='FFLAGS=\"-m64 -fcommon\"' ;;
    *) conf='FFLAGS=-m64' ;;
 esac
 
@@ -108,10 +108,10 @@ else
    echo "**No curl or wget command on your system -- install one and retry"
    exit 1
 fi
-[ ! -z $(path md5) ] && MD5=md5 || MD5=
+[ ! -z $(path md5) ] && MD5='md5 -q' || MD5=
 [ -z "$MD5" ] && [ ! -z $(path md5sum) ] && MD5=md5sum
-if [ ! -z $MD5 ] ; then
-   md5src=$($MD5 --quiet $tmp.src.tgz)
+if [ ! -z "$MD5" ] ; then
+   md5src=$($MD5 $tmp.src.tgz)
    if [ ! $md5src = $md5sum ] ; then
       echo "**Source checksum mismatch; corrupted download?"
       echo "**  Actual checksum is ${md5src}"; exit 1
@@ -127,8 +127,8 @@ if [ ! -z `path curl` ] ; then
 else
    wget -O - ${fn} > $tmp.pch.tgz
 fi
-if [ ! -z $MD5 ] ; then
-   md5exp=`eval echo \\$md5sum${ver}` md5pch=$($MD5 --quiet $tmp.pch.tgz)
+if [ ! -z "$MD5" ] ; then
+   md5exp=`eval echo \\$md5sum${ver}` md5pch=$($MD5 $tmp.pch.tgz)
    if [ ! $md5pch = $md5exp ] ; then
       echo "**Patch checksum mismatch; corrupted download?"
       echo "**  Actual checksum is ${md5pch}"; exit 1
@@ -154,7 +154,7 @@ rm -f aux/fgdata.sdf .gdb_history
 
 # Configure and build
 chmod ugo+rx ./configure src/evalresp-*/configure
-./configure ${conf} $* --prefix=${loc} --exec-prefix=${loc}
+./configure ${conf} --prefix=${loc} --exec-prefix=${loc} $*
 
 # Prepare destination directory
 [ -d $loc ] || mkdir -p $loc || \
