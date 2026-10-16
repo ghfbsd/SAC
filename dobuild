@@ -94,7 +94,7 @@ case $sysid in
    Linux-*-x86_64)
       conf='CFLAGS=-fcommon --x-libraries=/usr/lib/x86_64-linux-gnu/' ;;
    Linux-*-aarch64)
-      conf='CFLAGS=-fcommon --x-libraries=/usr/lib/aarch64-linux-gnu/' ;;
+      conf='CFLAGS=-fcommon --x-libraries=/usr/lib/aarch64-linux-gnu/'
       conf="${conf} --disable-static" ;;
    *) conf='--without-openmp' ;;
 esac
