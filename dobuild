@@ -48,7 +48,7 @@ md5sum113=54684dccade79b07a79714a86b4b2f86   # r113
 md5sum114=3dadc36fa6352cddb9e383ca51b4b95b   # r114
 md5sum115=b58b564a71ccaa9649e30d41c19f7cdd   # r115
 md5sum116=023ba5758efaeb9eed601d89a83db989   # r116
-md5sum117=d928c8a577ba7a312854948d11010e5a   # r117
+md5sum117=03b87d68e3c4bef69c9c12519d510496   # r117
 
 function path() {
    ## path XX - Check path for XX, print if present
@@ -164,7 +164,6 @@ rm -f aux/fgdata.sdf .gdb_history
 # Configure and build
 chmod ugo+rx ./configure src/evalresp-*/configure
 ./configure FFLAGS="${FFLAGS}" LDFLAGS="${LDFLAGS}" ${conf} \
-   X_PRE_LIBS='-Wl,-Bdynamic -lXaw7' \
    --prefix=${loc} --exec-prefix=${loc} $*
 cat config.log > /tmp/config.log
 
