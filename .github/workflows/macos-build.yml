@@ -2,6 +2,8 @@ name: MacOS source build
 run-name: MacOS source build
 on:
    push:
+     branches:
+     - 'admin'
      paths:
      - 'dobuild'
      - '**.yml'
@@ -11,17 +13,24 @@ jobs:
      steps:
      - name: Check out repository
        uses: actions/checkout@v4
+     - name: Set up Xcode
+       uses: maxim-lobanov/setup-xcode@v1
+       with:
+          xcode-version: latest-stable
      - name: Build
        shell: bash
        run: |
           brew install xquartz --cask
-          sh dobuild -- F77=gfortran-11 CC=gcc-11
+          brew install gfortran
+          cc -v
+          gfortran -v
+          ./dobuild $PWD/sac-test   # -- F77=gfortran-11 CC=gcc-11
      - name: Test for success
        shell: bash
        run: |
-          if [ -f /usr/local/bin/sac ] ; then
+          if [ -f sac-test/bin/sac ] ; then
              ( echo 'message "build successful"' ; echo 'quit' ) |
-                 /usr/local/bin/sac > prog.out
+                 sac-test/bin/sac > prog.out
              echo 'Build success:' | cat - prog.out >> $GITHUB_STEP_SUMMARY
           else
              echo 'Build fail' >> $GITHUB_STEP_SUMMARY

@@ -1,14 +1,15 @@
 # SAC[^rev]
 
-[^rev]: Revision 14
+[^rev]: Revision 15
 
 This is a repository where you can download binary distributions of the
 SAC/BRIS (also known as Mac SAC) for computers running MacOS.  If you are
 not running MacOS, you need to compile SAC yourself by installing it from
 source.  An automated script to do this can be found
 [here](https://raw.githubusercontent.com/ghfbsd/SAC/main/dobuild);
-this is a shell script that downloads, patches and compiles the source code
-based on educated guesses about your system.
+this is a shell script
+that downloads, patches and compiles the source code based on educated guesses
+about your system.  Look in later sections for notes on source builds.
 
 SAC/BRIS is based on the 10.6d source code, updated to equivalent functionality
 as 10.6f, and extended from there.  It is compatible with IRIS's SAC (except
@@ -66,8 +67,8 @@ OS/hardware combination.  Otherwise, build it yourself from source.
 
 Information about all of the releases may be found [here](https://members.elsi.jp/~george/sac-bugs.html#rel).
 
-| SAC/BRIS Release | 11.6 | 10.9-10.6 | 10.5-10.4 |
-| ---------------- | -----| ---------- | --------- |
+| SAC/BRIS Release \ MacOS version | 11.6 | 10.9-10.6 | 10.5-10.4 |
+| -------------------------------- | -----| ---------- | --------- |
 | [grh-116](https://members.elsi.jp/~george/sac-bugs.html#grh116) | [M1 X+mac](https://raw.githubusercontent.com/ghfbsd/SAC/main/rels/MacSAC-grh116-11.6a.dmg) | [Intel X+mac](https://raw.githubusercontent.com/ghfbsd/SAC/main/rels/MacSAC-grh116-10.9j.dmg)  | |
 | | | | |
 | [grh-115](https://members.elsi.jp/~george/sac-bugs.html#grh115) | | [Intel X+mac](https://members.elsi.jp/~george/MacSAC-grh115-10.9i.dmg) | |
@@ -94,3 +95,25 @@ Information about all of the releases may be found [here](https://members.elsi.j
 operations on traces, otherwise.  OpenMP support provided within the SAC
 libraries and neither gfortran nor OpenMP need be installed on your computer --
 at least that's the idea, so if OpenMP features don't work, report it as a bug!
+
+# Source builds
+
+Use the build script for source builds.  It reconstructs the SAC source code,
+compiles it and installs the programs in /usr/local by default; the source code
+is thrown away.  The program location can be changed; see the instructions in
+the script itself.  Since SAC/BRIS is developed on a MacOS system, MacOS source
+builds will work.  The SAC developers test source builds on Ubuntu systems as
+well, so Ubuntu builds should also work provided that the proper packages are
+also installed.  For other systems, see the build script for guidance.  You
+generally need only X11 development library for graphics use, but may want to
+add line editing features (like `readline`) and parallel processing capability
+(*Open MP*, usually part of the compilers).
+
+Notes for source builds on specific systems follow.
+
+## Ubuntu builds
+
+Install these packages before building:
+* gfortran, gcc (compilers)
+* libreadline-dev (line edit/re-entry)
+* libx11-dev, libxaw7-dev, libxmu-dev, libxext-dev, libxt-dev (window system)

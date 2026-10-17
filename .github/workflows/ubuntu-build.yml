@@ -1,0 +1,46 @@
+name: Ubuntu source build
+
+on:
+  push:
+    branches:
+    - 'admin'
+    paths:
+    - 'dobuild'
+    - '**.yml'
+
+jobs:
+  Source-build:
+
+    runs-on: ubuntu-24.04-arm
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y gfortran
+        sudo apt install -y gcc
+        sudo apt install -y libreadline-dev
+        sudo apt install -y libx11-dev
+        sudo apt install -y libxaw7-dev
+        sudo apt install -y libxmu-dev
+        sudo apt install -y libxext-dev
+        sudo apt install -y libxt-dev
+        sudo ldconfig
+    - name: Compile sources
+      shell: bash
+      run: |
+        gfortran --version
+        ./dobuild $PWD/sac-test -- F77=gfortran CC=gcc
+    - name: Test for success
+      shell: bash
+      run: |
+         if [ -f sac-test/bin/sac ] ; then
+            ( echo 'message "build successful"' ; echo 'quit' ) |
+                sac-test/bin/sac > prog.out
+            echo 'Build success:' | cat - prog.out >> $GITHUB_STEP_SUMMARY
+         else
+            echo 'Build fail'   >> $GITHUB_STEP_SUMMARY
+            echo                >> $GITHUB_STEP_SUMMARY
+            cat /tmp/config.log >> $GITHUB_STEP_SUMMARY
+         fi
