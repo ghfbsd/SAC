@@ -1,6 +1,6 @@
 # SAC[^rev]
 
-[^rev]: Revision 11
+[^rev]: Revision 16
 
 This is a repository where you can download binary distributions of the
 SAC/BRIS (also known as Mac SAC) for computers running MacOS.  If you are
@@ -87,14 +87,16 @@ at least that's the idea, so if OpenMP features don't work, report it as a bug!
 
 # Source builds
 
-Use the build script for source builds.  It reconstructs the SAC source code,
+Use the build script (`dobuild`) for source builds.  It reconstructs the SAC
+source code,
 compiles it and installs the programs in /usr/local by default; the source code
-is thrown away.  The program location can be changed; see the instructions in
-the script itself.  Since SAC/BRIS is developed on a MacOS system, MacOS source
+is then thrown away.  The program's install location can be changed; see the
+instructions in the script itself.
+Since SAC/BRIS is developed on a MacOS system, MacOS source
 builds will work.  The SAC developers test source builds on Ubuntu systems as
 well, so Ubuntu builds should also work provided that the proper packages are
 also installed.  For other systems, see the build script for guidance.  You
-generally need only X11 development library for graphics use, but may want to
+generally need only X11 development libraries for graphics use, but may want to
 add line editing features (like `readline`) and parallel processing capability
 (*Open MP*, usually part of the compilers).
 
@@ -106,3 +108,8 @@ Install these packages before building:
 * gfortran, gcc (compilers)
 * libreadline-dev (line edit/re-entry)
 * libx11-dev, libxaw7-dev, libxmu-dev, libxext-dev, libxt-dev (window system)
+
+Unless you have super-user access and can install libraries in their standard
+locations, you will need to let the compilers know where the libraries and
+include files reside.  Explicit settings of `CFLAGS=-I<library path>` and
+`LDFLAGS=-L<library path>` will probably be needed.
