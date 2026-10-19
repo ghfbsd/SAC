@@ -6,7 +6,8 @@ This is a repository where you can download binary distributions of the
 SAC/BRIS (also known as Mac SAC) for computers running MacOS.  If you are
 not running MacOS, you need to compile SAC yourself by installing it from
 source.  An automated script to do this can be found
-[here](https://github.com/ghfbsd/SAC/blob/main/dobuild); this is a shell script
+[here](https://raw.githubusercontent.com/ghfbsd/SAC/main/dobuild);
+this is a shell script
 that downloads, patches and compiles the source code based on educated guesses
 about your system.  Look in later sections for notes on source builds.
 
@@ -17,7 +18,7 @@ via SAC and download data.  (These features will be added in a future release.)
 SAC/BRIS is documented in the book, *The Seismic Analysis Code* (Cambridge
 University Press).
 
-# Downloading
+# Downloading and Installing
 
 Downloads are in the form of a MacOS disk image (folder) that you can mount
 and look inside of.  Generally, you will find an MacOS package to install and
@@ -28,6 +29,14 @@ erase all knowledge of having ever
 had it installed.  After you install, you can close and throw away the disk
 image.  You can save and cherish it, or download it again later to get the
 uninstall app if you decide to get rid of SAC.
+
+If your Mac won't let you install from unknown .dmg (disk image) files,
+temporarily turn off enforcement of this rule from the command line:
+`sudo spctl --master-disable`
+which will allow you to see and check "Anywhere" from the
+System Preferences -> Security & Privacy "General" menu.
+After installing, you might want to revert to the original protection level
+by re-enabling checks: `sudo spctl --master-enable`
 
 MacOS has evolved through the years through different releases (Panther,
 Tiger, Leopard, ..., Big Sur, Monterey) and on different hardware
@@ -56,9 +65,11 @@ OS/hardware combination.  Otherwise, build it yourself from source.
 
 ## Contemporary versions
 
-| SAC/BRIS release \ MacOS version | 11.6 | 10.18-10.6 | 10.5-10.4 |
+Information about all of the releases may be found [here](https://members.elsi.jp/~george/sac-bugs.html#rel).
+
+| SAC/BRIS Release \ MacOS version | 11.6 | 10.9-10.6 | 10.5-10.4 |
 | -------------------------------- | -----| ---------- | --------- |
-| [grh-116](https://members.elsi.jp/~george/sac-bugs.html#grh116) | [M1 X+mac](https://members.elsi.jp/~george/MacSAC-grh116-11.6a.dmg) | [Intel X+mac](https://members.elsi.jp/~george/sac-bugs.html#grh116)  | |
+| [grh-116](https://members.elsi.jp/~george/sac-bugs.html#grh116) | [M1 X+mac](https://raw.githubusercontent.com/ghfbsd/SAC/main/rels/MacSAC-grh116-11.6a.dmg) | [Intel X+mac](https://raw.githubusercontent.com/ghfbsd/SAC/main/rels/MacSAC-grh116-10.9j.dmg)  | |
 | | | | |
 | [grh-115](https://members.elsi.jp/~george/sac-bugs.html#grh115) | | [Intel X+mac](https://members.elsi.jp/~george/MacSAC-grh115-10.9i.dmg) | |
 | | | | |
