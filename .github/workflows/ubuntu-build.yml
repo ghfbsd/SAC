@@ -31,6 +31,7 @@ jobs:
       shell: bash
       run: |
         gfortran --version
+        chmod ugo+rx dobuild
         ./dobuild $PWD/sac-test -- F77=gfortran CC=gcc
     - name: Test for success
       shell: bash
