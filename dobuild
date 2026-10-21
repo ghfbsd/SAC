@@ -67,6 +67,10 @@ if [ -z `eval echo \\$md5sum${ver}` ]; then
    echo "**Invalid release: ${ver}; re-specify."
    exit 1
 fi
+rel=$(date -I |
+   awk 'BEGIN{n=split("Jan Feb Mar Apr May June July Aug Sep Oct Nov Dec",m)}
+      {n=split($0,f,"-"); print m[0+f[2]],f[3],f[1]}'
+)
 
 # Build system description triple
 sysid=$(uname -p -r -s | sed -e 's;-;+;g' | awk '{printf "%s-%s-%s",$1,$2,$3}')
@@ -153,7 +157,7 @@ if [ ! -f configure ]; then
    echo "**Patch process failed.  Verify patch command functionality."
    exit 1
 fi
-sed -i -e 's|-grh|/BRIS|' src/top/initsac.f
+sed -i -e 's|-grh|/BRIS|' -e "s|June 25 1991|${rel}|" src/top/initsac.f
 sed -i -e "s|SACVER|'-${ver}'|" src/top/initsac.f
 sed -i -e 's|Copyright 1991 Regents of the University of California|See COPYRIGHT for information.|' src/top/initsac.f
 cp -R ../taup/utils/taup utils
