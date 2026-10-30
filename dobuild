@@ -25,7 +25,8 @@
 #   --without-x             compiles without X-windows support
 #
 # G. Helffrich/U Bristol 21 Feb. 2013
-#   last update 16 Oct. 2026
+#   last update 30 Oct. 2026
+rel=2026-10-30
 
 locdef=/usr/local verdef=117 tmp=/tmp/tmp$$ dir=/tmp/sacbuild
 loc=${1:-${locdef}} ver=${2:-${verdef}}
@@ -48,7 +49,7 @@ md5sum113=54684dccade79b07a79714a86b4b2f86   # r113
 md5sum114=3dadc36fa6352cddb9e383ca51b4b95b   # r114
 md5sum115=b58b564a71ccaa9649e30d41c19f7cdd   # r115
 md5sum116=023ba5758efaeb9eed601d89a83db989   # r116
-md5sum117=2fbb04938aee6053ab1dfca793012718   # r117
+md5sum117=432df2c1697c42e3e063175d05343591   # r117
 
 function path() {
    ## path XX - Check path for XX, print if present
@@ -61,6 +62,11 @@ function MD5like() {
    ## Output like md5 -q XX
    md5sum --tag $1 | awk '{print $(NF)}'
 }
+
+rel=$(echo $rel |
+   awk 'BEGIN{n=split("Jan Feb Mar Apr May June July Aug Sep Oct Nov Dec",m)}
+      {n=split($0,f,"-"); print m[0+f[2]],f[3],f[1]}'
+)
 
 # Check release is recognized
 if [ -z `eval echo \\$md5sum${ver}` ]; then
@@ -153,7 +159,7 @@ if [ ! -f configure ]; then
    echo "**Patch process failed.  Verify patch command functionality."
    exit 1
 fi
-sed -i -e 's|-grh|/BRIS|' src/top/initsac.f
+sed -i -e 's|-grh|/BRIS|' -e "s|June 25 1991|${rel}|" src/top/initsac.f
 sed -i -e "s|SACVER|'-${ver}'|" src/top/initsac.f
 sed -i -e 's|Copyright 1991 Regents of the University of California|See COPYRIGHT for information.|' src/top/initsac.f
 cp -R ../taup/utils/taup utils
