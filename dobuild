@@ -25,7 +25,7 @@
 #   --without-x             compiles without X-windows support
 #
 # G. Helffrich/U Bristol 21 Feb. 2013
-#   last update 16 Oct. 2026
+#   last update 30 Oct. 2026
 
 locdef=/usr/local verdef=117 tmp=/tmp/tmp$$ dir=/tmp/sacbuild
 loc=${1:-${locdef}} ver=${2:-${verdef}}
@@ -67,7 +67,9 @@ if [ -z `eval echo \\$md5sum${ver}` ]; then
    echo "**Invalid release: ${ver}; re-specify."
    exit 1
 fi
-rel=$(date -I |
+
+# Source release date
+srel=$(echo 2026-10-30 |
    awk 'BEGIN{n=split("Jan Feb Mar Apr May June July Aug Sep Oct Nov Dec",m)}
       {n=split($0,f,"-"); print m[0+f[2]],f[3],f[1]}'
 )
@@ -157,9 +159,12 @@ if [ ! -f configure ]; then
    echo "**Patch process failed.  Verify patch command functionality."
    exit 1
 fi
-sed -i -e 's|-grh|/BRIS|' -e "s|June 25 1991|${rel}|" src/top/initsac.f
-sed -i -e "s|SACVER|'-${ver}'|" src/top/initsac.f
-sed -i -e 's|Copyright 1991 Regents of the University of California|See COPYRIGHT for information.|' src/top/initsac.f
+sed -i \
+   -e 's|-grh|/BRIS|' \
+   -e "s|June 25 1991|${srel}|" \
+   -e "s|SACVER|'-${ver}'|" \
+   -e 's|Copyright 1991 Regents of the University of California|See COPYRIGHT for information.|' \
+   src/top/initsac.f
 cp -R ../taup/utils/taup utils
 cp -R ../gd4/Contents src/gd4.app
 rm -rf ../taup ../gd4 ../patch
