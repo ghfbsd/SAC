@@ -77,7 +77,7 @@ fi
 # Build system description triple
 sysid=$(uname -p -r -s | sed -e 's;-;+;g' | awk '{printf "%s-%s-%s",$1,$2,$3}')
 echo "Build for ${sysid}"
-FFLAGS= LDFLAGS= conf=
+FFLAGS= LDFLAGS= CFLAGS= conf=
 case $sysid in
    Darwin-*-powerpc) FFLAGS=-m32 ;;
    Darwin-[678]*-i386)  FFLAGS=-m32 ;;
@@ -98,9 +98,11 @@ case $sysid in
    Darwin-*-arm)
       FFLAGS=-m64 conf='--without-libxml --disable-static' ;;
    Linux-*-x86_64)
-      conf='CFLAGS=-fcommon --x-libraries=/usr/lib/x86_64-linux-gnu/' ;;
+      CFLAGS='-fcommon -D_GNU_SOURCE'
+      conf='--x-libraries=/usr/lib/x86_64-linux-gnu/' ;;
    Linux-*-aarch64)
-      conf='CFLAGS=-fcommon --x-libraries=/usr/lib/aarch64-linux-gnu/'
+      CFLAGS=-fcommon
+      conf='--x-libraries=/usr/lib/aarch64-linux-gnu/'
       conf="${conf} --disable-static" ;;
    *) conf='--without-openmp' ;;
 esac
@@ -169,7 +171,7 @@ rm -f aux/fgdata.sdf .gdb_history
 
 # Configure and build
 chmod ugo+rx ./configure src/evalresp-*/configure
-./configure FFLAGS="${FFLAGS}" LDFLAGS="${LDFLAGS}" ${conf} \
+./configure CFLAGS="${CFLAGS}" FFLAGS="${FFLAGS}" LDFLAGS="${LDFLAGS}" ${conf} \
    --prefix=${loc} --exec-prefix=${loc} $*
 cat config.log > /tmp/config.log
 
