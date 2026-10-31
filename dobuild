@@ -75,7 +75,7 @@ if [ -z `eval echo \\$md5sum${ver}` ]; then
 fi
 
 # Build system description triple
-sysid=$(uname -p -r -s | sed -e 's;-;+;g' | awk '{printf "%s-%s-%s",$1,$2,$3}')
+sysid=$(uname -p -r -m | sed -e 's;-;+;g' | awk '{printf "%s-%s-%s",$1,$2,$3}')
 echo "Build for ${sysid}"
 FFLAGS= LDFLAGS= CFLAGS= conf=
 case $sysid in
@@ -108,7 +108,7 @@ case $sysid in
 esac
 
 echo
-echo "Building with configure flags 'FFLAGS=${FFLAGS} LDFLAGS=${LDFLAGS} ${conf} $*' for ${sysid}"
+echo "Building with configure flags 'CFLAGS=${CFLAGS} FFLAGS=${FFLAGS} LDFLAGS=${LDFLAGS} ${conf} $*' for ${sysid}"
 echo
 
 # Check that build directory does not already exist; make anew if so
