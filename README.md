@@ -69,7 +69,7 @@ Information about all of the releases may be found [here](https://members.elsi.j
 
 | SAC/BRIS Release \ MacOS version | 11.6 | 10.9-10.6 | 10.5-10.4 |
 | -------------------------------- | -----| ---------- | --------- |
-| [grh-116](https://members.elsi.jp/~george/sac-bugs.html#grh116) | [M1 X+mac](https://raw.githubusercontent.com/ghfbsd/SAC/main/rels/MacSAC-grh116-11.6a.dmg) | [Intel X+mac](https://raw.githubusercontent.com/ghfbsd/SAC/main/rels/MacSAC-grh116-10.9j.dmg)  | |
+| [grh-116](https://members.elsi.jp/~george/sac-bugs.html#grh116) | [M1 X+mac](https://raw.githubusercontent.com/ghfbsd/SAC/rel/rels/MacSAC-grh116-11.6a.dmg) | [Intel X+mac](https://raw.githubusercontent.com/ghfbsd/SAC/rel/rels/MacSAC-grh116-10.9j.dmg)  | |
 | | | | |
 | [grh-115](https://members.elsi.jp/~george/sac-bugs.html#grh115) | | [Intel X+mac](https://members.elsi.jp/~george/MacSAC-grh115-10.9i.dmg) | |
 | | | | |
