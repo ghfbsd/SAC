@@ -25,7 +25,8 @@
 #   --without-x             compiles without X-windows support
 #
 # G. Helffrich/U Bristol 21 Feb. 2013
-#   last update 16 Oct. 2026
+#   last update 31 Oct. 2026
+rel=2026-10-31
 
 locdef=/usr/local verdef=117 tmp=/tmp/tmp$$ dir=/tmp/sacbuild
 loc=${1:-${locdef}} ver=${2:-${verdef}}
@@ -48,7 +49,7 @@ md5sum113=54684dccade79b07a79714a86b4b2f86   # r113
 md5sum114=3dadc36fa6352cddb9e383ca51b4b95b   # r114
 md5sum115=b58b564a71ccaa9649e30d41c19f7cdd   # r115
 md5sum116=023ba5758efaeb9eed601d89a83db989   # r116
-md5sum117=59b31caea9247b54cba4b2e76b8825b8   # r117
+md5sum117=282006c0cc12b70c5a46c1781c34840c   # r117
 
 function path() {
    ## path XX - Check path for XX, print if present
@@ -62,6 +63,11 @@ function MD5like() {
    md5sum --tag $1 | awk '{print $(NF)}'
 }
 
+rel=$(echo $rel |
+   awk 'BEGIN{n=split("Jan Feb Mar Apr May June July Aug Sep Oct Nov Dec",m)}
+      {n=split($0,f,"-"); print m[0+f[2]],f[3],f[1]}'
+)
+
 # Check release is recognized
 if [ -z `eval echo \\$md5sum${ver}` ]; then
    echo "**Invalid release: ${ver}; re-specify."
@@ -69,9 +75,9 @@ if [ -z `eval echo \\$md5sum${ver}` ]; then
 fi
 
 # Build system description triple
-sysid=$(uname -p -r -s | sed -e 's;-;+;g' | awk '{printf "%s-%s-%s",$1,$2,$3}')
+sysid=$(uname -m -r -s | sed -e 's;-;+;g' | awk '{printf "%s-%s-%s",$1,$2,$3}')
 echo "Build for ${sysid}"
-FFLAGS= LDFLAGS= conf=
+FFLAGS= LDFLAGS= CFLAGS= conf=
 case $sysid in
    Darwin-*-powerpc) FFLAGS=-m32 ;;
    Darwin-[678]*-i386)  FFLAGS=-m32 ;;
@@ -92,15 +98,17 @@ case $sysid in
    Darwin-*-arm)
       FFLAGS=-m64 conf='--without-libxml --disable-static' ;;
    Linux-*-x86_64)
-      conf='CFLAGS=-fcommon --x-libraries=/usr/lib/x86_64-linux-gnu/' ;;
+      CFLAGS='-fcommon -D_GNU_SOURCE'
+      conf='--x-libraries=/usr/lib/x86_64-linux-gnu/' ;;
    Linux-*-aarch64)
-      conf='CFLAGS=-fcommon --x-libraries=/usr/lib/aarch64-linux-gnu/'
+      CFLAGS=-fcommon
+      conf='--x-libraries=/usr/lib/aarch64-linux-gnu/'
       conf="${conf} --disable-static" ;;
    *) conf='--without-openmp' ;;
 esac
 
 echo
-echo "Building with configure flags 'FFLAGS=${FFLAGS} LDFLAGS=${LDFLAGS} ${conf} $*' for ${sysid}"
+echo "Building with configure flags 'CFLAGS=${CFLAGS} FFLAGS=${FFLAGS} LDFLAGS=${LDFLAGS} ${conf} $*' for ${sysid}"
 echo
 
 # Check that build directory does not already exist; make anew if so
@@ -153,7 +161,7 @@ if [ ! -f configure ]; then
    echo "**Patch process failed.  Verify patch command functionality."
    exit 1
 fi
-sed -i -e 's|-grh|/BRIS|' src/top/initsac.f
+sed -i -e 's|-grh|/BRIS|' -e "s|June 25 1991|${rel}|" src/top/initsac.f
 sed -i -e "s|SACVER|'-${ver}'|" src/top/initsac.f
 sed -i -e 's|Copyright 1991 Regents of the University of California|See COPYRIGHT for information.|' src/top/initsac.f
 cp -R ../taup/utils/taup utils
@@ -163,7 +171,7 @@ rm -f aux/fgdata.sdf .gdb_history
 
 # Configure and build
 chmod ugo+rx ./configure src/evalresp-*/configure
-./configure FFLAGS="${FFLAGS}" LDFLAGS="${LDFLAGS}" ${conf} \
+./configure CFLAGS="${CFLAGS}" FFLAGS="${FFLAGS}" LDFLAGS="${LDFLAGS}" ${conf} \
    --prefix=${loc} --exec-prefix=${loc} $*
 cat config.log > /tmp/config.log
 
