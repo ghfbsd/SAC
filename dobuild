@@ -25,7 +25,7 @@
 #   --without-x             compiles without X-windows support
 #
 # G. Helffrich/U Bristol 21 Feb. 2013
-#   last update 31 Oct. 2026
+#   last update 04 Nov. 2026
 rel=2026-10-31
 
 locdef=/usr/local verdef=117 tmp=/tmp/tmp$$ dir=/tmp/sacbuild
@@ -95,7 +95,7 @@ case $sysid in
    Darwin-2*-i386)
       FFLAGS=-m64 LDFLAGS=-Wl,-no_pie conf='--without-libxml'
       conf="${conf} --disable-static" ;;
-   Darwin-*-arm)
+   Darwin-*-arm64)
       FFLAGS=-m64 conf='--without-libxml --disable-static' ;;
    Linux-*-x86_64)
       CFLAGS='-fcommon -D_GNU_SOURCE'
@@ -161,9 +161,11 @@ if [ ! -f configure ]; then
    echo "**Patch process failed.  Verify patch command functionality."
    exit 1
 fi
-sed -i -e 's|-grh|/BRIS|' -e "s|June 25 1991|${rel}|" src/top/initsac.f
-sed -i -e "s|SACVER|'-${ver}'|" src/top/initsac.f
-sed -i -e 's|Copyright 1991 Regents of the University of California|See COPYRIGHT for information.|' src/top/initsac.f
+sed -i '' \
+   -e 's|-grh|/BRIS|' -e "s|June 25 1991|${rel}|" \
+   -e "s|SACVER|'-${ver}'|" \
+   -e 's|Copyright 1991 Regents of the University of California|See COPYRIGHT for information.|' \
+   src/top/initsac.f
 cp -R ../taup/utils/taup utils
 cp -R ../gd4/Contents src/gd4.app
 rm -rf ../taup ../gd4 ../patch
