@@ -172,6 +172,7 @@ rm -rf ../taup ../gd4 ../patch
 rm -f aux/fgdata.sdf .gdb_history
 
 # Configure and build
+unset SACAUX                      ## Can conflict with configure/make if set
 chmod ugo+rx ./configure src/evalresp-*/configure
 ./configure CFLAGS="${CFLAGS}" FFLAGS="${FFLAGS}" LDFLAGS="${LDFLAGS}" ${conf} \
    --prefix=${loc} --exec-prefix=${loc} $*
@@ -182,7 +183,6 @@ cat config.log > /tmp/config.log
    { echo "**Unable to make ${loc}; install aborted" ; exit 1 ; }
 
 # Build
-unset SACAUX                              ## Can cause problems with make if set
 make SHELL=/bin/bash install prefix=${loc}
 
 # Clean up source code build directories
